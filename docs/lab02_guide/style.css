@@ -1,0 +1,154 @@
+/* KKU Campus Guide - Responsive CSS */
+:root {
+    --bg: #fef5f1;
+    --card: #ffffff;
+    --accent: #C41E3A;
+    --accent-light: #E8714F;
+    --muted: #666;
+    --radius: 10px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Segoe UI, Roboto, "Noto Sans Thai", sans-serif;
+    background: var(--bg);
+    color: #222
+}
+
+header.site-header {
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    color: #fff;
+    padding: 28px 20px
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px
+}
+
+.site-title {
+    margin: 0;
+    font-size: 1.4rem
+}
+
+.site-meta {
+    font-size: 0.95rem;
+    opacity: 0.95
+}
+
+nav.site-nav a {
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    margin-left: 12px
+}
+
+.container {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 0 20px
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid #e6eef9;
+    box-shadow: 0 6px 18px rgba(10, 30, 70, 0.05)
+}
+
+.card h2 {
+    margin: 0 0 8px 0;
+    color: var(--accent)
+}
+
+.card p {
+    margin: 0 0 12px 0;
+    color: var(--muted);
+    line-height: 1.5
+}
+
+.figure-row {
+    display: flex;
+    gap: 10px
+}
+
+.figure-row figure {
+    flex: 1;
+    margin: 0
+}
+
+figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px
+}
+
+figcaption {
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 6px
+}
+
+.footer {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    color: #777
+}
+
+/* Logo canvas in header */
+#logoCanvas{
+    width:64px;
+    height:64px;
+    background:transparent;
+    border-radius:8px;
+    display:block;
+}
+
+/* Suggestion form styles */
+#suggest input[type="text"],
+#suggest input[type="url"],
+#suggest textarea{
+    font-family:inherit;
+}
+
+@media (max-width:800px) {
+    #logoCanvas{width:54px;height:54px}
+    #suggest form{display:block}
+    #suggest form > div{grid-template-columns:1fr}
+}
+
+/* Box model demonstration: padding, border, margin used above */
+/* Responsive */
+@media (max-width:800px) {
+    .grid {
+        grid-template-columns: 1fr
+    }
+
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start
+    }
+
+    .site-title {
+        font-size: 1.2rem
+    }
+}

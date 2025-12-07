@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KKU Campus Guide - แนะนำสถานที่ในมหาวิทยาลัยขอนแก่น</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div style="display:flex;align-items:center;gap:14px">
+        <video id="logoVideo" width="96" height="96" autoplay muted loop style="border-radius:8px;background:#000">
+          <source src="images/s.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div>
+          <h1 class="site-title">KKU Campus Guide</h1>
+          <div class="site-meta">รหัสนักศึกษา: 663380509-5 &nbsp; | &nbsp; นางสาวพิมอัปสร แพน</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="container">
+    <section class="grid">
+      <article id="bueng" class="card">
+        <h2>บึงสีฐาน</h2>
+        <p>บึงสีฐานเป็นจุดพักผ่อนยอดนิยมของคนในมหาวิทยาลัยขอนแก่น มีทัศนียภาพสวยงาม เหมาะสำหรับการเดินเล่น ออกกำลังกาย และถ่ายรูปกลางแจ้ง โดยมีทางเดินรอบบึงและพื้นที่นั่งพักผ่อน</p>
+        <div class="figure-row">
+          <figure>
+            <img src="images/บึง.jpg" alt="บึงสีฐาน">
+            <figcaption>บึงสีฐาน ยามเช้า</figcaption>
+          </figure>
+          <figure>
+            <img src="images/บึง2.jpg" alt="บึงสีฐาน">
+            <figcaption>ส่วนที่จัดงานประจำปี</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article id="aud" class="card">
+        <h2>หอประชุมใหญ่</h2>
+        <p>หอประชุมใหญ่เป็นสถานที่จัดกิจกรรมสำคัญของมหาวิทยาลัย เช่น พิธีการประชุม งานแสดง และการบรรยายขนาดใหญ่ มีที่นั่งรองรับจำนวนมากและสิ่งอำนวยความสะดวกครบครัน</p>
+        <div class="figure-row">
+          <figure>
+            <img src="images/หอประชุม.png" alt="หอประชุม">
+            <figcaption>ภายนอกหอประชุม</figcaption>
+          </figure>
+          <figure>
+            <img src="images/หอประชุม2.jpg" alt="หอประชุม">
+            <figcaption>ภายในหอประชุมและเวที</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article id="lib" class="card">
+        <h2>ห้องสมุดกลาง</h2>
+        <p>ห้องสมุดกลางให้บริการทรัพยากรการเรียนรู้ทั้งรูปเล่มและดิจิทัล พร้อมพื้นที่อ่านหนังสือและห้องประชุมย่อย เหมาะสำหรับการค้นคว้าและทำงานกลุ่ม</p>
+        <div class="figure-row">
+          <figure>
+            <img src="images/ห้องสมุด.jpeg" alt="ห้องสมุดกลาง">
+            <figcaption>อาคารห้องสมุดกลาง</figcaption>
+          </figure>
+          <figure>
+            <img src="images/ห้องสมุด.jpg" alt="ห้องสมุดกลาง">
+            <figcaption>มุมอ่านหนังสือภายในห้องสมุด</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article id="agri" class="card">
+        <h2>คณะเกษตรศาสตร์</h2>
+        <p>คณะเกษตรศาสตร์เป็นหนึ่งในคณะที่มีพื้นที่วิจัยและแปลงสาธิตพืช มีบรรยากาศสีเขียว เหมาะสำหรับการเรียนการสอนด้านพืชและสิ่งมีชีวิต พร้อมห้องปฏิบัติการและแปลงทดลอง</p>
+        <div class="figure-row">
+          <figure>
+            <img src="images/สวน.jpeg" alt="คณะเกษตรศาสตร์">
+            <figcaption>แปลงสาธิตพืช</figcaption>
+          </figure>
+          <figure>
+            <img src="images/คณะเกษคร.jpg" alt="คณะเกษตรศาสตร์">
+            <figcaption>อาคารคณะเกษตรศาสตร์</figcaption>
+          </figure>
+        </div>
+      </article>
+
+    </section>
+
+    <section id="suggest" class="card" aria-labelledby="suggestTitle" style="margin-top:24px">
+      <h2 id="suggestTitle">แนะนำสถานที่ใหม่</h2>
+      <p>หากคุณต้องการแนะนำสถานที่ภายในมหาวิทยาลัย โปรดกรอกข้อมูลด้านล่างเพื่อนำไปพัฒนาเว็บไซต์ต่อไป</p>
+      <form id="placeForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="03c21d6e-5855-45f3-9aa8-40f627f45983">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label style="display:block">
+            ชื่อสถานที่<br>
+            <input type="text" name="place_name" required placeholder="เช่น บึงสีฐาน" style="width:100%;padding:8px;border-radius:6px;border:1px solid #E8714F">
+          </label>
+          <label style="display:block">
+            URL ของภาพ<br>
+            <input type="url" name="image_url" required placeholder="https://example.com/image.jpg" style="width:100%;padding:8px;border-radius:6px;border:1px solid #E8714F">
+          </label>
+        </div>
+        <label style="display:block;margin-top:12px">
+          รายละเอียด / คำอธิบาย<br>
+          <textarea name="description" rows="5" required placeholder="รายละเอียดของสถานที่" style="width:100%;padding:10px;border-radius:6px;border:1px solid #E8714F"></textarea>
+        </label>
+        <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+          <button type="submit" style="background:var(--accent);color:#fff;padding:10px 16px;border-radius:8px;border:none;cursor:pointer">ส่งคำแนะนำ</button>
+          <span id="formStatus" style="color:var(--muted)"></span>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>KKU Campus Guide</div>
+    <div>รหัสนักศึกษา: 663380509-5 | นางสาวพิมอัปสร แพน</div>
+  </footer>
+
+  <script>
+  (function(){
+    const form = document.getElementById('placeForm');
+    const status = document.getElementById('formStatus');
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      status.textContent = 'กำลังส่ง...';
+      const data = new FormData(form);
+  
+      fetch(form.action, {
+        method: form.method,
+        body: data
+      }).then(async res => {
+        if(res.ok){
+          status.textContent = 'ส่งสำเร็จ ขอบคุณสำหรับคำแนะนำ!';
+          form.reset();
+        } else {
+          const txt = await res.text().catch(()=>res.statusText);
+          status.textContent = 'เกิดข้อผิดพลาด: ' + (txt || res.statusText);
+        }
+      }).catch(err=>{
+        status.textContent = 'ไม่สามารถเชื่อมต่อได้ — โปรดตรวจสอบ access_key หรือเครือข่าย.';
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

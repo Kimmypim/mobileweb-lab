@@ -9,89 +9,141 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      font-family: Segoe UI, Roboto, "Noto Sans Thai", sans-serif;
-      background: #fef5f1;
-      color: #222;
+      font-family: 'Segoe UI', Roboto, 'Noto Sans Thai', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .main-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      margin: 20px;
+      padding: 30px;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
     header.site-header {
-      background: linear-gradient(90deg, #C41E3A, #E8714F);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #fff;
-      padding: 28px 20px;
+      padding: 40px 30px;
+      border-radius: 20px 20px 0 0;
+      text-align: center;
+      margin-bottom: 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
     .back-link {
-      display: inline-block;
       margin-bottom: 20px;
     }
     .back-link a {
-      color: #C41E3A;
+      color: #667eea;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
     .back-link a:hover {
-      text-decoration: underline;
+      color: #764ba2;
+      text-decoration: none;
+      transform: translateX(-5px);
+    }
+    .section-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .section-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     }
     .screenshot-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
       margin: 30px 0;
     }
     .screenshot-item {
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      background: #fff;
     }
     .screenshot-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     }
     .screenshot-item img {
       width: 100%;
-      height: auto;
+      height: 200px;
+      object-fit: cover;
       display: block;
     }
     .screenshot-caption {
-      padding: 12px;
+      padding: 15px;
       background: #fff;
       font-size: 0.95rem;
       text-align: center;
       color: #666;
+      font-weight: 500;
     }
     .download-section {
-      background: #fff3cd;
-      border-left: 4px solid #ffc107;
-      padding: 20px;
-      border-radius: 6px;
+      background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+      border-left: 5px solid #ffc107;
+      padding: 25px;
+      border-radius: 15px;
       margin: 30px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .download-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffc107" opacity="0.1"/></svg>');
+      opacity: 0.1;
     }
     .download-btn {
-      background: linear-gradient(90deg, #C41E3A, #E8714F);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       border: none;
       color: white;
-      padding: 12px 30px;
+      padding: 15px 35px;
       font-weight: bold;
-      border-radius: 6px;
+      border-radius: 50px;
       text-decoration: none;
       display: inline-block;
-      transition: transform 0.2s;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      position: relative;
+      z-index: 1;
     }
     .download-btn:hover {
       color: white;
       text-decoration: none;
-      transform: scale(1.05);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
     }
     .feature-list {
       list-style: none;
       padding: 0;
     }
     .feature-list li {
-      padding: 8px 0;
-      padding-left: 25px;
+      padding: 12px 0;
+      padding-left: 35px;
       position: relative;
+      transition: all 0.3s ease;
+    }
+    .feature-list li:hover {
+      transform: translateX(5px);
     }
     .feature-list li:before {
       content: "✓";
@@ -100,114 +152,170 @@
       color: #28a745;
       font-weight: bold;
       font-size: 18px;
+      background: #d4edda;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tech-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
+      border: 1px solid #e9ecef;
+      transition: all 0.3s ease;
+    }
+    .tech-card:hover {
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+    footer {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 0 0 20px 20px;
+      margin-top: 0;
+    }
+    h4 {
+      color: #667eea;
+      font-weight: 700;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    h4::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 2px;
+    }
+    .student-info {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+      font-weight: bold;
+      font-size: 18px;
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header text-center">
-    <h3 class="mb-1">Lab04: Photo Web Application</h3>
-    <p class="mb-1">Vue.js + Ionic + Capacitor</p>
-    <p class="mb-0"><strong>นักศึกษา:</strong> นางสาวพิมอัปสร แพน (663380509-5)</p>
-  </header>
-
-  <main class="container mt-4">
-    <div class="back-link">
-      <a href="index.html">← กลับไปหน้าแรก</a>
-    </div>
-
-    <section>
-      <h4 class="mb-3 text-primary">เกี่ยวกับโปรเจกต์</h4>
-      <p>
-        Lab04 เป็นการพัฒนาแอปพลิเคชันแบบไฮบริด (Hybrid Mobile App) 
-        สำหรับจัดการและดูรูปภาพ โดยใช้ Vue.js, Ionic Framework และ Capacitor 
-        เพื่อสร้างแอปพลิเคชันที่สามารถทำงานได้ทั้งบนเว็บและมือถือ
-      </p>
-      
-      <h5 class="mt-4 mb-3 text-primary">ฟีเจอร์หลัก</h5>
-      <ul class="feature-list">
-        <li>ถ่ายรูปและบันทึกลงในอุปกรณ์</li>
-        <li>เลือกรูปภาพจากแกลเลอรี่</li>
-        <li>แสดงรูปภาพในรูปแบบกริด</li>
-        <li>ลบและจัดการรูปภาพ</li>
-        <li>ตอบสนองต่อขนาดหน้าจอต่างๆ (Responsive)</li>
-        <li>ออกแบบโดย Ionic Components</li>
-      </ul>
-    </section>
-
-    <section>
-      <h4 class="mb-3 text-primary">หน้าจอตัวอย่าง</h4>
-      <div class="screenshot-grid">
-        <div class="screenshot-item">
-          <img src="https://via.placeholder.com/300x600?text=Screenshot+1" alt="หน้าแรก">
-          <div class="screenshot-caption">หน้าแรก (Home Screen)</div>
-        </div>
-        <div class="screenshot-item">
-          <img src="https://via.placeholder.com/300x600?text=Screenshot+2" alt="แกลเลอรี่รูปภาพ">
-          <div class="screenshot-caption">แกลเลอรี่รูปภาพ (Gallery)</div>
-        </div>
-        <div class="screenshot-item">
-          <img src="https://via.placeholder.com/300x600?text=Screenshot+3" alt="เพิ่มรูปภาพ">
-          <div class="screenshot-caption">เพิ่มรูปภาพ (Add Photo)</div>
-        </div>
+  <div class="main-container">
+    <header class="site-header">
+      <h3 class="mb-2"><i class="fas fa-camera-retro me-2"></i>Lab04: Photo Web Application</h3>
+      <p class="mb-2">Vue.js + Ionic + Capacitor</p>
+      <div class="student-info">
+        <strong>นักศึกษา:</strong> นางสาวพิมอัปสร แพน (663380509-5)
       </div>
-    </section>
+    </header>
 
-    <section>
-      <h4 class="mb-3 text-primary">ดาวน์โหลด APK</h4>
-      <div class="download-section">
-        <h5 class="mb-3">ดาวน์โหลดแอปพลิเคชันเพื่อใช้งานบนอุปกรณ์ Android</h5>
-        <p class="mb-3">
-          กรุณาดาวน์โหลดไฟล์ APK ด้านล่างเพื่อติดตั้งแอปพลิเคชันบนอุปกรณ์ Android ของคุณ
+    <main class="container-fluid">
+      <div class="back-link">
+        <a href="index.html"><i class="fas fa-arrow-left me-1"></i> กลับไปหน้าแรก</a>
+      </div>
+
+      <section class="section-card">
+        <h4><i class="fas fa-info-circle me-2"></i>เกี่ยวกับโปรเจกต์</h4>
+        <p>
+          Lab04 เป็นการพัฒนาแอปพลิเคชันแบบไฮบริด (Hybrid Mobile App) 
+          สำหรับจัดการและดูรูปภาพ โดยใช้ Vue.js, Ionic Framework และ Capacitor 
+          เพื่อสร้างแอปพลิเคชันที่สามารถทำงานได้ทั้งบนเว็บและมือถือ
         </p>
-        <a href="lab04-photo.apk" download class="download-btn">
-          ดาวน์โหลด APK
-        </a>
-        <p class="mt-3 mb-0 text-muted" style="font-size: 0.9rem;">
-          <strong>หมายเหตุ:</strong> โปรดเปิดใช้งาน "Unknown Sources" ในการตั้งค่าของอุปกรณ์ 
-          เพื่ออนุญาตการติดตั้งแอปพลิเคชันจากแหล่งอื่น
-        </p>
-      </div>
-    </section>
+        
+        <h5 class="mt-4 mb-3"><i class="fas fa-star me-2"></i>ฟีเจอร์หลัก</h5>
+        <ul class="feature-list">
+          <li><i class="fas fa-camera me-2"></i>ถ่ายรูปและบันทึกลงในอุปกรณ์</li>
+          <li><i class="fas fa-images me-2"></i>เลือกรูปภาพจากแกลเลอรี่</li>
+          <li><i class="fas fa-th me-2"></i>แสดงรูปภาพในรูปแบบกริด</li>
+          <li><i class="fas fa-trash me-2"></i>ลบและจัดการรูปภาพ</li>
+          <li><i class="fas fa-mobile-alt me-2"></i>ตอบสนองต่อขนาดหน้าจอต่างๆ (Responsive)</li>
+          <li><i class="fas fa-palette me-2"></i>ออกแบบโดย Ionic Components</li>
+        </ul>
+      </section>
 
-    <section>
-      <h4 class="mb-3 text-primary">เทคโนโลยีที่ใช้</h4>
-      <div class="row">
-        <div class="col-md-6">
-          <h5>Frontend</h5>
-          <ul>
-            <li>Vue.js 3</li>
-            <li>Ionic Framework 6</li>
-            <li>TypeScript</li>
-            <li>CSS3 & Bootstrap</li>
-          </ul>
+      <section class="section-card">
+        <h4><i class="fas fa-images me-2"></i>หน้าจอตัวอย่าง</h4>
+        <div class="screenshot-grid">
+          <div class="screenshot-item">
+            <img src="https://via.placeholder.com/300x600?text=Screenshot+1" alt="หน้าแรก">
+            <div class="screenshot-caption"><i class="fas fa-home me-1"></i>หน้าแรก (Home Screen)</div>
+          </div>
+          <div class="screenshot-item">
+            <img src="https://via.placeholder.com/300x600?text=Screenshot+2" alt="แกลเลอรี่รูปภาพ">
+            <div class="screenshot-caption"><i class="fas fa-images me-1"></i>แกลเลอรี่รูปภาพ (Gallery)</div>
+          </div>
+          <div class="screenshot-item">
+            <img src="https://via.placeholder.com/300x600?text=Screenshot+3" alt="เพิ่มรูปภาพ">
+            <div class="screenshot-caption"><i class="fas fa-plus-circle me-1"></i>เพิ่มรูปภาพ (Add Photo)</div>
+          </div>
         </div>
-        <div class="col-md-6">
-          <h5>Mobile</h5>
-          <ul>
-            <li>Capacitor</li>
-            <li>Camera Plugin</li>
-            <li>File System API</li>
-            <li>Android SDK</li>
-          </ul>
+      </section>
+
+      <section class="section-card">
+        <h4><i class="fas fa-download me-2"></i>ดาวน์โหลด APK</h4>
+        <div class="download-section">
+          <h5 class="mb-3"><i class="fas fa-android me-2"></i>ดาวน์โหลดแอปพลิเคชันเพื่อใช้งานบนอุปกรณ์ Android</h5>
+          <p class="mb-3">
+            กรุณาดาวน์โหลดไฟล์ APK ด้านล่างเพื่อติดตั้งแอปพลิเคชันบนอุปกรณ์ Android ของคุณ
+          </p>
+          <a href="lab04-photo.apk" download class="download-btn">
+            <i class="fas fa-download me-2"></i>ดาวน์โหลด APK
+          </a>
+          <p class="mt-3 mb-0 text-muted" style="font-size: 0.9rem;">
+            <strong><i class="fas fa-exclamation-triangle me-1"></i>หมายเหตุ:</strong> โปรดเปิดใช้งาน "Unknown Sources" ในการตั้งค่าของอุปกรณ์ 
+            เพื่ออนุญาตการติดตั้งแอปพลิเคชันจากแหล่งอื่น
+          </p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section>
-      <h4 class="mb-3 text-primary">ลิงก์ที่เกี่ยวข้อง</h4>
-      <ul>
-        <li><a href="../apps/lab04-photo-vue/dist/index.html" target="_blank">ดูเว็บแอปฯ (Web Version)</a></li>
-        <li><a href="https://ionicframework.com" target="_blank">Ionic Framework</a></li>
-        <li><a href="https://vuejs.org" target="_blank">Vue.js</a></li>
-        <li><a href="https://capacitorjs.com" target="_blank">Capacitor</a></li>
-      </ul>
-    </section>
-  </main>
+      <section class="section-card">
+        <h4><i class="fas fa-cogs me-2"></i>เทคโนโลยีที่ใช้</h4>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="tech-card">
+              <h5><i class="fas fa-code me-2"></i>Frontend</h5>
+              <ul class="list-unstyled">
+                <li><i class="fab fa-vuejs me-2 text-success"></i>Vue.js 3</li>
+                <li><i class="fas fa-mobile me-2 text-primary"></i>Ionic Framework 6</li>
+                <li><i class="fab fa-js-square me-2 text-warning"></i>TypeScript</li>
+                <li><i class="fab fa-css3-alt me-2 text-info"></i>CSS3 & Bootstrap</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="tech-card">
+              <h5><i class="fas fa-mobile-alt me-2"></i>Mobile</h5>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-plug me-2 text-secondary"></i>Capacitor</li>
+                <li><i class="fas fa-camera me-2 text-danger"></i>Camera Plugin</li>
+                <li><i class="fas fa-folder me-2 text-dark"></i>File System API</li>
+                <li><i class="fab fa-android me-2 text-success"></i>Android SDK</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-  <footer class="text-center mt-5 mb-3">
-    <p>© 2025 Mobile Web Application Development — College of Computing, Khon Kaen University</p>
-  </footer>
+    <footer>
+      <p><i class="fas fa-copyright me-1"></i> 2025 Mobile Web Application Development — College of Computing, Khon Kaen University</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </body>
 
 </html>

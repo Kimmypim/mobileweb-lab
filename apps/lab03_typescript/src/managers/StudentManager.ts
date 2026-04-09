@@ -1,4 +1,4 @@
-import { Student } from '../models/Students';
+import { Student } from '../models/Students.js';
 
 class StudentManager {
   private students: Student[] = [];

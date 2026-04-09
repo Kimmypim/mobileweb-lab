@@ -1,4 +1,4 @@
-import { Student } from "./models/Students";
+import { Student } from "./models/Students.js";
 import { StudentManager } from "./managers/StudentManager.js";
 import { showList } from "./utils/showList.js";
 

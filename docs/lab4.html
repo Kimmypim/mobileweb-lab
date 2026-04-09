@@ -241,6 +241,34 @@
       </section>
 
       <section class="section-card">
+        <h4><i class="fas fa-camera me-2"></i>ภาพถ่ายจากแอปพลิเคชัน</h4>
+        <p class="text-muted mb-4">รูปภาพที่ถ่ายโดยใช้แอปพลิเคชัน Lab04 Photo App</p>
+        
+        <div id="photo-gallery" class="screenshot-grid">
+          <div style="text-align: center; grid-column: 1 / -1; padding: 40px 20px;">
+            <div class="spinner-border text-primary mb-3" role="status">
+              <span class="visually-hidden">กำลังโหลด...</span>
+            </div>
+            <p class="text-muted">กำลังโหลดภาพถ่าย...</p>
+          </div>
+        </div>
+        
+        <div id="no-photos-message" class="alert alert-info d-none" role="alert">
+          <i class="fas fa-info-circle me-2"></i>
+          <strong>ไม่มีรูปภาพ</strong> — ยังไม่มีรูปภาพที่ถ่ายจากแอปพลิเคชัน 
+          <a href="../apps/lab04-photo-vue/index.html" target="_blank" class="alert-link">ไปที่แอปพลิเคชัน</a> 
+          เพื่อถ่ายรูป
+        </div>
+
+        <div id="app-link-section" class="mt-4 pt-3 border-top">
+          <p class="mb-3"><strong>สนใจที่จะถ่ายรูปเพิ่มเติม?</strong></p>
+          <a href="../apps/lab04-photo-vue/" target="_blank" class="btn btn-primary">
+            <i class="fas fa-external-link-alt me-2"></i>เปิดแอปพลิเคชัน Photo Gallery
+          </a>
+        </div>
+      </section>
+
+      <section class="section-card">
         <h4><i class="fas fa-images me-2"></i>หน้าจอตัวอย่าง</h4>
         <div class="screenshot-grid">
           <div class="screenshot-item">
@@ -310,7 +338,104 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</body>
+  
+  <script>
+    // Load and display photos from the Vue app
+    async function loadPhotosFromApp() {
+      try {
+        const gallery = document.getElementById('photo-gallery');
+        const noPhotosMsg = document.getElementById('no-photos-message');
+        
+        // Try to get photos from localStorage (shared from Vue app)
+        let photos = [];
 
-</html>
+        try {
+          const stored = localStorage.getItem('lab04-photos');
+          if (stored) {
+            photos = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.log('No localStorage photos found');
+        }
+
+        // If we got some photos, display them
+        if (photos.length > 0) {
+          displayPhotos(photos);
+        } else {
+          displayNoPhotos();
+        }
+      } catch (error) {
+        console.error('Error loading photos:', error);
+        displayNoPhotos();
+      }
+    }
+
+    function displayPhotos(photos) {
+      const gallery = document.getElementById('photo-gallery');
+      const noPhotosMsg = document.getElementById('no-photos-message');
+      
+      if (!photos || photos.length === 0) {
+        displayNoPhotos();
+        return;
+      }
+
+      gallery.innerHTML = '';
+      noPhotosMsg.classList.add('d-none');
+
+      photos.forEach((photo) => {
+        const photoItem = document.createElement('div');
+        photoItem.className = 'screenshot-item';
+        
+        const img = document.createElement('img');
+        // Support both webviewPath and webPath formats
+        img.src = photo.webviewPath || photo.webPath || photo.src || '';
+        img.alt = 'Photo from gallery';
+        img.style.borderRadius = '12px';
+        img.style.marginBottom = '8px';
+        
+        const caption = document.createElement('div');
+        caption.className = 'screenshot-caption';
+        caption.innerHTML = `<i class="fas fa-image me-1"></i>${photo.filepath || photo.name || 'Photo'}`;
+        
+        if (img.src) {
+          photoItem.appendChild(img);
+          photoItem.appendChild(caption);
+          gallery.appendChild(photoItem);
+        }
+      });
+
+      if (gallery.children.length === 0) {
+        displayNoPhotos();
+      }
+    }
+
+    function displayNoPhotos() {
+      const gallery = document.getElementById('photo-gallery');
+      const noPhotosMsg = document.getElementById('no-photos-message');
+      
+      gallery.innerHTML = '';
+      noPhotosMsg.classList.remove('d-none');
+    }
+
+    // Load photos when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load initial photos
+      loadPhotosFromApp();
+      
+      // Listen for updates from Vue app
+      window.addEventListener('photosUpdated', function() {
+        console.log('Photos updated from Vue app');
+        loadPhotosFromApp();
+      });
+
+      // Also poll periodically in case events are missed
+      setInterval(loadPhotosFromApp, 2000);
+    });
+
+    // Also try to load when page becomes visible
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        loadPhotosFromApp();
+      }
+    });
+  </script>

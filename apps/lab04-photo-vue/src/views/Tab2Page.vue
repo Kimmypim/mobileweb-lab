@@ -80,11 +80,15 @@ const takePhoto = async () => {
     directory: Directory.Data
   });
 
-
-  photos.value.unshift({
+  const photoData = {
     filepath: fileName,
     webviewPath: `data:image/jpeg;base64,${photo.base64String}`
-  });
+  };
+
+  photos.value.unshift(photoData);
+  
+  // Share photos with documentation page
+  savePhotosToLocalStorage();
 };
 
 
@@ -106,6 +110,19 @@ const loadSaved = async () => {
       filepath: file.name,
       webviewPath: `data:image/jpeg;base64,${fileData.data}`
     });
+  }
+
+  // Share with documentation page
+  savePhotosToLocalStorage();
+};
+
+const savePhotosToLocalStorage = () => {
+  try {
+    localStorage.setItem('lab04-photos', JSON.stringify(photos.value));
+    // Also dispatch a custom event so documentation page can update immediately
+    window.dispatchEvent(new Event('photosUpdated'));
+  } catch (e) {
+    console.log('Could not save to localStorage:', e);
   }
 };
 

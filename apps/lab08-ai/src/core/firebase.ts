@@ -2,9 +2,9 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDJsanc6AoJsVmtKNFTqEdq3kduW8e7b6I",
-  authDomain: "mobileapp-fe3bc.firebaseapp.com",
-  projectId: "mobileapp-fe3bc"
+  apiKey: "AIzaSyBFGRwfMkJvWXkYS7QgmGS7pVJbvphIf50",
+  authDomain: "ai-68525.firebaseapp.com",
+  projectId: "ai-68525"
 };
 
 export const app = initializeApp(firebaseConfig);

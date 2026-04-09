@@ -34,7 +34,7 @@ function usePhotoGallery() {
 
     const fileName = new Date().getTime() + '.jpeg';
 
-    // 💾 save ลงเครื่อง
+    //  save ลงเครื่อง
     await Filesystem.writeFile({
       path: fileName,
       data: photo.base64String!,
@@ -49,14 +49,14 @@ function usePhotoGallery() {
     const newPhotos = [newPhoto, ...photos];
     setPhotos(newPhotos);
 
-    // 💾 save list
+    //  save list
     await Preferences.set({
       key: PHOTO_STORAGE,
       value: JSON.stringify(newPhotos),
     });
   };
 
-  // 🔄 โหลดรูปตอนเปิดแอป
+  //  โหลดรูปตอนเปิดแอป
   const loadSaved = async () => {
     const { value } = await Preferences.get({ key: PHOTO_STORAGE });
     if (value) {
@@ -99,7 +99,7 @@ const Tab2: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        {/* 🖼 แสดงรูป */}
+        {/*แสดงรูป */}
         <IonGrid>
           <IonRow>
             {photos.map((photo, index) => (
@@ -110,7 +110,7 @@ const Tab2: React.FC = () => {
           </IonRow>
         </IonGrid>
 
-        {/* 📷 ปุ่มถ่ายรูป */}
+        {/* ปุ่มถ่ายรูป */}
         <IonFab vertical="bottom" horizontal="center" slot="fixed">
           <IonFabButton onClick={takePhoto}>
             <IonIcon icon={camera}></IonIcon>

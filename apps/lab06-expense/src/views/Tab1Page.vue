@@ -8,14 +8,17 @@
 
     <ion-content class="ion-padding">
 
-      <!-- ปุ่มเพิ่ม -->
       <ion-button expand="block" @click="goToAdd">
         เพิ่มรายการ
       </ion-button>
 
-      <!-- รายการ -->
       <ion-list>
-        <ion-item button v-for="item in expenses" :key="item.id" @click="editExpense(item.id)">
+        <ion-item
+          button
+          v-for="item in expenses"
+          :key="item.id"
+          @click="editExpense(item.id)"
+        >
           <ion-label>
             <h2>{{ item.title }}</h2>
             <p>{{ item.category }} | {{ item.type }}</p>
@@ -38,21 +41,19 @@ import {
   IonButton, IonBadge
 } from '@ionic/vue';
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '@/firebase';
 
-// router
 const router = useRouter();
-
-// state
 const expenses = ref<any[]>([]);
 
-// โหลดข้อมูล realtime
+let unsubscribe: any;
+
 onMounted(() => {
-  onSnapshot(collection(db, "expenses"), (snapshot) => {
+  unsubscribe = onSnapshot(collection(db, "expenses"), (snapshot) => {
     expenses.value = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
@@ -60,13 +61,15 @@ onMounted(() => {
   });
 });
 
-// ไปหน้าเพิ่มข้อมูล
+onUnmounted(() => {
+  if (unsubscribe) unsubscribe();
+});
+
 const goToAdd = () => {
   router.push('/tabs/add');
 };
 
-// ไปหน้าแก้ไขข้อมูล
 const editExpense = (id: string) => {
-  router.push('/tabs/edit/' + id);
+  router.push('/edit/' + id);
 };
 </script>

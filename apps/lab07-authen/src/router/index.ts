@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TabsPage.vue';
+import { authService } from '@/auth/auth-service';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,7 +9,11 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/tabs/tab1'
   },
   {
-    path: '/tabs',
+    path: '/login',
+    component: () => import('@/views/LoginPage.vue' as any)
+  },
+  {
+    path: '/tabs/',
     component: TabsPage,
     children: [
       {
@@ -26,24 +31,30 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'tab3',
         component: () => import('@/views/Tab3Page.vue')
-      },
-      {
-        path: 'add',
-        component: () => import('@/views/AddExpense.vue')
       }
     ]
-  },
-
-
-  {
-    path: '/edit/:id',
-    component: () => import('@/views/EditExpense.vue')
   }
 ];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
+});
+
+
+//ต้องวาง AFTER สร้าง router
+router.beforeEach(async (to) => {
+  const user = await authService.getCurrentUser();
+
+  if (!user && to.path !== "/login") {
+    return "/login";
+  }
+
+  if (user && to.path === "/login") {
+    return "/tabs/tab1";
+  }
+
+  return true;
 });
 
 export default router;

@@ -10,6 +10,9 @@
     </ion-header>
 
     <ion-content class="ion-padding">
+
+      <ion-loading :is-open="loading" message="กำลังโหลด..." />
+
       <ion-card v-if="!loading">
         <ion-card-header>
           <ion-card-title>แก้ไขค่าใช้จ่าย / รายได้</ion-card-title>
@@ -22,10 +25,8 @@
             <ion-item>
               <ion-label position="stacked">ชื่อรายการ</ion-label>
               <ion-input
-                placeholder="เช่น ค่าอาหารกลางวัน"
-                clear-input
                 :value="title"
-                @ionInput="title = $event.detail.value!"
+                @ionInput="title = $event.detail.value || ''"
               />
             </ion-item>
 
@@ -33,10 +34,8 @@
               <ion-label position="stacked">จำนวนเงิน</ion-label>
               <ion-input
                 type="number"
-                placeholder="เช่น 250"
-                clear-input
                 :value="amount"
-                @ionInput="amount = $event.detail.value!"
+                @ionInput="amount = $event.detail.value || ''"
               />
             </ion-item>
 
@@ -44,8 +43,7 @@
               <ion-label position="stacked">ประเภท</ion-label>
               <ion-select
                 :value="type"
-                interface="popover"
-                @ionChange="type = $event.detail.value"
+                @ionChange="type = $event.detail.value || 'expense'"
               >
                 <ion-select-option value="income">รายรับ</ion-select-option>
                 <ion-select-option value="expense">รายจ่าย</ion-select-option>
@@ -55,39 +53,32 @@
             <ion-item>
               <ion-label position="stacked">หมวดหมู่</ion-label>
               <ion-input
-                placeholder="เช่น อาหาร, เดินทาง"
-                clear-input
                 :value="category"
-                @ionInput="category = $event.detail.value!"
+                @ionInput="category = $event.detail.value || ''"
               />
             </ion-item>
 
             <ion-item>
               <ion-label position="stacked">หมายเหตุ</ion-label>
               <ion-textarea
-                placeholder="เพิ่มรายละเอียดเพิ่มเติม"
-                auto-grow
                 :value="note"
-                @ionInput="note = $event.detail.value!"
+                @ionInput="note = $event.detail.value || ''"
               />
             </ion-item>
 
           </ion-list>
 
-          <div class="button-row">
-            <ion-button expand="block" fill="outline" color="danger" @click="confirmDelete">
-              ลบข้อมูล
-            </ion-button>
+          <ion-button expand="block" color="danger" @click="confirmDelete">
+            ลบข้อมูล
+          </ion-button>
 
-            <ion-button expand="block" :disabled="!isValid" @click="updateExpense">
-              อัปเดตข้อมูล
-            </ion-button>
-          </div>
+          <ion-button expand="block" :disabled="!isValid" @click="updateExpense">
+            อัปเดตข้อมูล
+          </ion-button>
 
         </ion-card-content>
       </ion-card>
 
-      <ion-loading :is-open="loading" message="กำลังโหลด..." />
     </ion-content>
   </ion-page>
 </template>
@@ -128,44 +119,35 @@ onMounted(async () => {
   const id = route.params.id as string;
 
   if (!id) {
-    console.error("No ID provided");
     loading.value = false;
     return;
   }
 
   try {
-    const docRef = doc(db, "expenses", id);
-    const docSnap = await getDoc(docRef);
+    const docSnap = await getDoc(doc(db, "expenses", id));
 
     if (docSnap.exists()) {
       const data: any = docSnap.data();
       title.value = data.title || "";
-      amount.value = data.amount ? data.amount.toString() : "";
+      amount.value = data.amount?.toString() || "";
       type.value = data.type || "expense";
       category.value = data.category || "";
       note.value = data.note || "";
-    } else {
-      console.error("Document not found");
     }
-  } catch (error) {
-    console.error("Error loading document:", error);
+  } catch (e) {
+    console.error(e);
   }
 
   loading.value = false;
 });
 
 const updateExpense = async () => {
-  if (!isValid.value) return;
-
   const id = route.params.id as string;
+  if (!id || !isValid.value) return;
 
-  if (!id) return;
-
-  const docRef = doc(db, "expenses", id);
-
-  await updateDoc(docRef, {
+  await updateDoc(doc(db, "expenses", id), {
     title: title.value.trim(),
-    amount: Number(amount.value || 0),
+    amount: Number(amount.value),
     type: type.value,
     category: category.value.trim(),
     note: note.value.trim(),
@@ -178,7 +160,7 @@ const updateExpense = async () => {
 const confirmDelete = async () => {
   const alert = await alertController.create({
     header: 'ยืนยันการลบ',
-    message: 'คุณต้องการลบรายการนี้หรือไม่?',
+    message: 'ต้องการลบใช่ไหม?',
     buttons: [
       { text: 'ยกเลิก', role: 'cancel' },
       { text: 'ลบ', role: 'destructive', handler: deleteExpense }
@@ -190,32 +172,9 @@ const confirmDelete = async () => {
 
 const deleteExpense = async () => {
   const id = route.params.id as string;
-
   if (!id) return;
 
-  const docRef = doc(db, "expenses", id);
-  await deleteDoc(docRef);
-
+  await deleteDoc(doc(db, "expenses", id));
   router.push('/tabs/tab1');
 };
 </script>
-
-<style scoped>
-.button-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-  margin-top: 1.25rem;
-}
-
-ion-card {
-  border-radius: 18px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
-
-@media (max-width: 480px) {
-  .button-row {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

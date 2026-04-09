@@ -484,6 +484,91 @@ importers:
         specifier: ^2.1.10
         version: 2.2.12(typescript@5.9.3)
 
+  apps/lab07-authen:
+    dependencies:
+      '@capacitor-firebase/authentication':
+        specifier: ^8.2.0
+        version: 8.2.0(@capacitor/core@8.3.0)(firebase@12.11.0)
+      '@capacitor/android':
+        specifier: 8.3.0
+        version: 8.3.0(@capacitor/core@8.3.0)
+      '@capacitor/app':
+        specifier: 8.1.0
+        version: 8.1.0(@capacitor/core@8.3.0)
+      '@capacitor/core':
+        specifier: 8.3.0
+        version: 8.3.0
+      '@capacitor/haptics':
+        specifier: 8.0.2
+        version: 8.0.2(@capacitor/core@8.3.0)
+      '@capacitor/keyboard':
+        specifier: 8.0.2
+        version: 8.0.2(@capacitor/core@8.3.0)
+      '@capacitor/status-bar':
+        specifier: 8.0.2
+        version: 8.0.2(@capacitor/core@8.3.0)
+      '@ionic/vue':
+        specifier: ^8.0.0
+        version: 8.7.11(@stencil/core@4.38.3)(vue-router@4.6.3(vue@3.5.25(typescript@5.9.3)))(vue@3.5.25(typescript@5.9.3))
+      '@ionic/vue-router':
+        specifier: ^8.0.0
+        version: 8.7.11(@stencil/core@4.38.3)(vue-router@4.6.3(vue@3.5.25(typescript@5.9.3)))(vue@3.5.25(typescript@5.9.3))
+      firebase:
+        specifier: ^12.11.0
+        version: 12.11.0
+      ionicons:
+        specifier: ^7.0.0
+        version: 7.4.0
+      vue:
+        specifier: ^3.3.0
+        version: 3.5.25(typescript@5.9.3)
+      vue-router:
+        specifier: ^4.2.0
+        version: 4.6.3(vue@3.5.25(typescript@5.9.3))
+    devDependencies:
+      '@capacitor/cli':
+        specifier: 8.3.0
+        version: 8.3.0
+      '@vitejs/plugin-legacy':
+        specifier: ^5.0.0
+        version: 5.4.3(terser@5.44.1)(vite@5.4.21(@types/node@24.10.1)(terser@5.44.1))
+      '@vitejs/plugin-vue':
+        specifier: ^4.0.0
+        version: 4.6.2(vite@5.4.21(@types/node@24.10.1)(terser@5.44.1))(vue@3.5.25(typescript@5.9.3))
+      '@vue/eslint-config-typescript':
+        specifier: ^12.0.0
+        version: 12.0.0(eslint-plugin-vue@9.33.0(eslint@8.57.1))(eslint@8.57.1)(typescript@5.9.3)
+      '@vue/test-utils':
+        specifier: ^2.3.0
+        version: 2.4.6
+      cypress:
+        specifier: ^13.5.0
+        version: 13.17.0
+      eslint:
+        specifier: ^8.35.0
+        version: 8.57.1
+      eslint-plugin-vue:
+        specifier: ^9.9.0
+        version: 9.33.0(eslint@8.57.1)
+      jsdom:
+        specifier: ^22.1.0
+        version: 22.1.0
+      terser:
+        specifier: ^5.4.0
+        version: 5.44.1
+      typescript:
+        specifier: ~5.9.0
+        version: 5.9.3
+      vite:
+        specifier: ^5.0.0
+        version: 5.4.21(@types/node@24.10.1)(terser@5.44.1)
+      vitest:
+        specifier: ^0.34.6
+        version: 0.34.6(jsdom@22.1.0)(terser@5.44.1)
+      vue-tsc:
+        specifier: ^2.1.10
+        version: 2.2.12(typescript@5.9.3)
+
 packages:
 
   '@adobe/css-tools@4.4.4':
@@ -995,6 +1080,15 @@ packages:
   '@babel/types@7.28.5':
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
+
+  '@capacitor-firebase/authentication@8.2.0':
+    resolution: {integrity: sha512-9TXdnxnDVuptwUM0fcChnAbejYAjO6UR7VHWHak7PRaBL/6MyHKtb8vgorFMH3Gf+pInZ6jAJUVpVBcaJ5HnLw==}
+    peerDependencies:
+      '@capacitor/core': '>=8.0.0'
+      firebase: ^12.6.0
+    peerDependenciesMeta:
+      firebase:
+        optional: true
 
   '@capacitor/android@8.3.0':
     resolution: {integrity: sha512-EQy6ByUuKayQBJmMm/e0byJiHavqsQHrvW23BuT2GNVQvenAvipqwaePiJHzrv2PZr7A0T0+se4kgDCeROj0mQ==}
@@ -5348,6 +5442,12 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@capacitor-firebase/authentication@8.2.0(@capacitor/core@8.3.0)(firebase@12.11.0)':
+    dependencies:
+      '@capacitor/core': 8.3.0
+    optionalDependencies:
+      firebase: 12.11.0
 
   '@capacitor/android@8.3.0(@capacitor/core@8.3.0)':
     dependencies:
